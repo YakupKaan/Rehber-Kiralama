@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme İşlemleri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group select, .form-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Ödeme İşlemleri</h2>
+        <form action="odeme_islemi.php" method="post">
+            <div class="form-group">
+                <label for="odeme_yontemi">Ödeme Yöntemi Seçimi:</label>
+                <select id="odeme_yontemi" name="odeme_yontemi">
+                    <option value="kredi_karti">Kredi Kartı</option>
+                    <option value="banka_havale">Banka Havale/EFT</option>
+                </select>
+            </div>
+            <?php
+            if(isset($_POST['odeme_yontemi']) && $_POST['odeme_yontemi'] == 'kredi_karti'):
+            ?>
+            <div class="form-group">
+                <label for="ad_soyad">Ad Soyad:</label>
+                <input type="text" id="ad_soyad" name="ad_soyad" required>
+                
+                <label for="kart_numarasi">Kart Numarası:</label>
+                <input type="text" id="kart_numarasi" name="kart_numarasi" required>
+
+                <label for="son_kullanma_tarihi">Son Kullanma Tarihi:</label>
+                <input type="text" id="son_kullanma_tarihi" name="son_kullanma_tarihi" required>
+                
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" required>
+            </div>
+            <?php endif; ?>
+            <div class="form-group">
+                <input type="submit" value="Ödemeye İlerle">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rehber Kiralama Sitesi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .form-container {
+            display: none;
+        }
+        form {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rehber Kiralama Sitesi</h1>
+        <div id="buttons">
+            <button id="loginButton">Giriş Yap</button>
+            <button id="signupButton">Kayıt Ol</button>
+        </div>
+        <div class="form-container" id="signupForm">
+            <h2>Kayıt Formu</h2>
+            <form id="registrationForm" action="kayit.php" method="post">
+                <div class="form-group">
+                    <label for="fullName">Adınız ve Soyadınız</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Adınız ve soyadınızı girin" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-posta Adresiniz</label>
+                    <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Şifre</label>
+                    <input type="password" id="password" name="password" placeholder="Şifrenizi belirleyin" required>
+                </div>
+                <button type="submit">Kayıt Ol</button>
+                <div class="error-message" id="signupErrorMessage"></div>
+            </form>
+        </div>
+        <div class="form-container" id="loginForm">
+            <h2>Giriş Yap</h2>
+            <form id="loginForm" action="giris.php" method="post">
+                <div class="form-group">
+                    <label for="loginUsername">Kullanıcı Adı</label>
+                    <input type="text" id="loginUsername" name="loginUsername" placeholder="Kullanıcı adınızı girin" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Şifre</label>
+                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Şifrenizi girin" required>
+                </div>
+                <button type="submit">Giriş Yap</button>
+                <div class="error-message" id="loginErrorMessage"></div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const signupButton = document.getElementById("signupButton");
+        const loginButton = document.getElementById("loginButton");
+        const signupForm = document.getElementById("signupForm");
+        const loginForm = document.getElementById("loginForm");
+        const buttons = document.getElementById("buttons");
+
+        signupButton.addEventListener("click", () => {
+            signupForm.style.display = "block";
+            loginForm.style.display = "none";
+            buttons.style.display = "none";
+        });
+
+        loginButton.addEventListener("click", () => {
+            signupForm.style.display = "none";
+            loginForm.style.display = "block";
+            buttons.style.display = "none";
+        });
+
+        const registrationForm = document.getElementById("registrationForm");
+        const loginFormElement = document.getElementById("loginForm");
+
+        registrationForm.addEventListener("submit", (event) => {
+            event.preventDefault(); 
+
+            const fullName = document.getElementById("fullName").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (!fullName || !email || !password) {
+                document.getElementById("signupErrorMessage").innerText = "Lütfen tüm alanları doldurun.";
+                return;
+            }
+
+            document.getElementById("signupErrorMessage").innerText = "";
+        });
+
+        loginFormElement.addEventListener("submit", (event) => {
+            event.preventDefault(); 
+
+            const username = document.getElementById("loginUsername").value;
+            const password = document.getElementById("loginPassword").value;
+
+            if (username !== "admin" || password !== "admin") {
+                document.getElementById("loginErrorMessage").innerText = "Kullanıcı adı veya şifre hatalı!";
+                return;
+            }
+
+            document.getElementById("loginErrorMessage").innerText = "";
+            alert("Giriş başarılı!");
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
